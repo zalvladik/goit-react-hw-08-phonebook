@@ -1,9 +1,9 @@
 import React,{ useState } from 'react'
 import { Container,Form,Button,Text,InputText } from './ContactFormStyled';
-import { addContactsThunk } from '../redux/fetchOperations';
+import { addContactsThunk } from 'redux/fetchOperations';
 import { nanoid } from 'nanoid'
 import { useDispatch } from "react-redux";
-import { reduxContacts } from 'components/redux/selectors';
+import { reduxContacts,reduxIsLoading } from 'redux/selectors';
 import { useSelector } from 'react-redux';
 
 const NewPhoneBookContainer = () =>{
@@ -12,6 +12,7 @@ const NewPhoneBookContainer = () =>{
 
     const dispatch = useDispatch()
     const contactsList = useSelector(reduxContacts)
+    const isLoading = useSelector(reduxIsLoading)
 
     const currentName = (event) =>{
         const {name,value} = event.currentTarget
@@ -62,7 +63,7 @@ const NewPhoneBookContainer = () =>{
             title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
             required
         />
-        <Button type='submit'>Add contact</Button>
+        <Button type='submit'>{isLoading ? 'Loadind...' : 'Add Contacts'}</Button>
         </Form>
         
         </Container>

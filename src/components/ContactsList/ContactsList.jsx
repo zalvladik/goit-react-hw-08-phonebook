@@ -1,9 +1,9 @@
 import {UlContacts,LiContacts,LiButton} from './ContactsListStyled'
 import { nanoid } from 'nanoid'
 import { useSelector, useDispatch } from 'react-redux'
-import { getContactsThunk, deleteContactsThunk } from 'components/redux/fetchOperations'
+import { getContactsThunk, deleteContactsThunk } from 'redux/fetchOperations'
 import { useEffect } from 'react'
-import { reduxContacts,reduxFilter,reduxIsLoading,reduxError } from 'components/redux/selectors'
+import { reduxContacts,reduxFilter,reduxIsLoading,reduxError } from 'redux/selectors'
 
 const ContactsList = () => {
     
@@ -27,15 +27,14 @@ const ContactsList = () => {
 
     return(
         <UlContacts>
-        {isLoading && <h3>Loadind...</h3>}
 
         {newState.length === 0 && !isLoading && !isError && <h3>No contacts found.</h3>}
 
         {isError && <h3>{isError}</h3>}
 
         {newState.map(event =>(
-            <LiContacts key={nanoid()}>{event.name}: {event.number}
-            <LiButton id={event.id} onClick={deleteName}>Delete</LiButton>
+            <LiContacts key={nanoid()}>- {event.name}: {event.number}
+            <LiButton id={event.id} onClick={deleteName}>{isLoading ? 'Loadind...' : 'Delete'}</LiButton>
             </LiContacts>
             
         ))}

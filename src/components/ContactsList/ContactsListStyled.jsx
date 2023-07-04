@@ -10,7 +10,7 @@ margin-bottom:10px;
 
 export const LiButton =styled.button`
 margin-left:20px;
-width:50px;
-height:20px;
 border:1px solid black;
+padding: 2px 5px;
+font-size: 15px;
 `

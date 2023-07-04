@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 
 export const Container = styled.div`
-
+margin-bottom:30px;
 `
 
 export const Form = styled.form`
@@ -18,8 +18,10 @@ margin:0px;
 `
 
 export const Button = styled.button`
-width:100px;
-height:20px;
+width:150px;
+padding-bottom:4px;
+padding-top:4px;
+font-size:15px;
 border:1px solid black;
 `
 
