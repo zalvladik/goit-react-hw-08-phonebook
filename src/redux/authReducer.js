@@ -17,7 +17,9 @@ const register_pending = (state, { payload }) =>{
 }
 
 const register_fulfilled = (state, { payload }) =>{
-    state.user = payload;
+    console.log(payload)
+    console.log(payload.user)
+    state.user = payload.user;
     state.token = payload.token;
     state.isLoggedIn = true;
 }
