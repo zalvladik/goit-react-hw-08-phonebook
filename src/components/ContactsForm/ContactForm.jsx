@@ -5,6 +5,7 @@ import { nanoid } from 'nanoid'
 import { useDispatch } from "react-redux";
 import { reduxContacts,reduxIsLoading } from 'redux/selectors';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 
 const NewPhoneBookContainer = () =>{
     const [name, setName] = useState('')
@@ -13,6 +14,19 @@ const NewPhoneBookContainer = () =>{
     const dispatch = useDispatch()
     const contactsList = useSelector(reduxContacts)
     const isLoading = useSelector(reduxIsLoading)
+
+    const wrongRegister = (info) => {
+        return toast.error(`${info} is already in contact`, {
+          position: "top-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+          });
+      } 
 
     const currentName = (event) =>{
         const {name,value} = event.currentTarget
@@ -30,11 +44,11 @@ const NewPhoneBookContainer = () =>{
     const addNewContact = (event) => {
         event.preventDefault()
         if(contactsList.find(option => option.name.toLowerCase() === `${name}`.toLowerCase())){
-          return alert(`${name} is already in contact`)
+          return wrongRegister(name)
         }
     
         if(contactsList.find(option => option.number === `${number}`)){
-          return alert(`${number} is already in contact`)
+          return wrongRegister(number)
         }
         
         const newContact = {id: `${nanoid()}`, name:`${name}`, number:`${number}`}
